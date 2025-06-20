@@ -1,0 +1,70 @@
+{% extends 'base.html' %}
+
+{% block links %}
+<link rel="stylesheet" href="{{ url_for('static', filename='styles/main.css')}}">
+{% endblock %}
+
+{% block subtitle %}
+{% endblock %}
+
+{% block content %}
+    {% with colours = get_colours() %}
+        {% with turret = get_turret_info() %}
+            <div class="overview" style="border-color: {{ colours['border'] }}">
+                <h1>{{ turret.name }}</h1> 
+                <div class="turret" style="border-color: {{ colours['border-interior'] }}">
+                    <img src="{{ url_for('static', filename='images/gg/turrets/' + turret.name + '.png' )}}"/>
+                </div>
+                <h2>"{{ turret.flavor }}"</h2>
+                <div class="divider" style="border-color: {{ colours['border-interior']}}"></div>
+                <div class="stats"><p>#HP{{ turret.hp }}</p><p>#SP{{ turret.sp }}</span></p></div>
+                <div class="stats"><p>#HM{{ turret.maxHeat }}</span></p></div>
+                <div class="stats"><p>#CR{{ turret.coolingRate }}</span></p></div>
+                <div class="stats"><p>#CD{{ turret.coolingDelay }}</span></p></div>
+                {% if turret.stats|length > 0 %}
+                    <div class="divider" style="border-color: {{ colours['border-interior']}}"></div>
+                {% endif %}
+                {% for stat in turret.stats %}
+                    <div class="otherstats"><p>{{ stat }}</p></div>
+                {% endfor %}
+                {% if turret.mechanics|length > 0 %}
+                    <div class="divider" style="border-color: {{ colours['border-interior']}}"></div>
+                {% endif %}
+                {% for mechanic in turret.mechanics %}
+                    <div class="otherstats"><p>{% if loop.index > 1 %}<br/>{% endif %}- {{ mechanic }}</p></div>
+                {% endfor %}
+                <div class="divider" style="border-color: {{ colours['border-interior']}}; border-color: {{ colours['border-interior']}}"></div>
+                {% for weapon in turret.weapons %}
+                    <div class="slots weapons">
+                        {% for i in range(weapon[0]) %}
+                            {% if i < turret.openSlots %}
+                                <img src="{{ url_for('static', filename='images/gg/slots/WepOpen.png' )}}"/>
+                            {% else %}
+                                <img src="{{ url_for('static', filename='images/gg/slots/WepClosed.png' )}}"/>
+                            {% endif %}
+                        {% endfor %}
+                    </div>
+                    <div class="slots">
+                        {% for i in range(weapon[1]) %}
+                            {% if i < turret.openSlots %}
+                                <img src="{{ url_for('static', filename='images/gg/slots/ModOpen.png' )}}"/>
+                            {% else %}
+                                <img src="{{ url_for('static', filename='images/gg/slots/ModClosed.png' )}}"/>
+                            {% endif %}
+                        {% endfor %}
+                    </div>
+                {% endfor %}
+                <div class="divider" style="border-color: {{ colours['border-interior']}}; border-color: {{ colours['border-interior']}}"></div>
+                <div class="otherstats"><p>{{ turret.unlock }}</span></p></div>
+            </div>
+        {% endwith %}
+        <div class="turretlist">
+            {% for turret in get_turrets() %}
+                <a href="{{ turret.name }}"><img class="turretimg" src="{{ url_for('static', filename='images/gg/turrets/' + turret.name + '.png' )}}"/></a>
+                {% if loop.index % 7 == 0 %}
+                    <br/>
+                {% endif %}
+            {% endfor %}
+        </div>
+    {% endwith %}
+{% endblock %}

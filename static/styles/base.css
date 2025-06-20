@@ -1,0 +1,36 @@
+* {
+    margin: 0;
+    font-size: 0;
+    font-family: "Fredoka", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+    color: #ffffff;
+}
+
+nav {
+    display: flex;
+}
+
+.GG,
+.CC {
+    width: 50%;
+    height: 15dvh;
+    display: flex;
+}
+
+
+@media (min-width: 1025px) {}
+
+@media (min-width: 768px) and (max-width: 1024px) and (orientation: landscape) {}
+
+@media (min-width: 320px) and (max-width: 767px) and (orientation: landscape) {}
+
+@media (min-width: 768px) and (max-width: 1024px) and (orientation: portrait) {}
+
+@media (min-width: 320px) and (max-width: 767px) and (orientation: portrait) {
+
+    .GG,
+    .CC {
+        height: 30dvh;
+    }
+}

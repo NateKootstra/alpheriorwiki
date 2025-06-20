@@ -1,0 +1,183 @@
+@keyframes turret {
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+:root {
+    --screen-width: 0.2;
+}
+
+@media (min-width: 1025px) {}
+
+@media (min-width: 768px) and (max-width: 1024px) and (orientation: landscape) {}
+
+@media (min-width: 320px) and (max-width: 767px) and (orientation: landscape) {}
+
+@media (min-width: 768px) and (max-width: 1024px) and (orientation: portrait) {
+    :root {
+        --screen-width: 0.85;
+    }
+
+    .overview {
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+    }
+}
+
+@media (max-width: 767px) and (orientation: portrait) {
+    :root {
+        --screen-width: 0.85;
+    }
+
+    .overview {
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+    }
+}
+
+.overview {
+    width: calc(100% * var(--screen-width));
+    height: fit-content;
+
+    padding: calc(5vw * var(--screen-width));
+
+    border-radius: calc(10vw * var(--screen-width));
+    border: calc(2.5vw * var(--screen-width)) solid;
+}
+
+.overview h1 {
+    width: 100%;
+
+    font-size: calc(15vw * var(--screen-width));
+    font-weight: 800;
+    text-align: center;
+}
+
+.overview h2 {
+    width: 100%;
+
+    margin-top: calc(5vw * var(--screen-width));
+
+    font-size: calc(7vw * var(--screen-width));
+    font-weight: 700;
+    font-style: italic;
+    text-align: center;
+}
+
+.overview .divider {
+    width: 92%;
+
+    margin-top: calc(5vw * var(--screen-width));
+    margin-bottom: calc(5vw * var(--screen-width));
+
+    margin-left: auto;
+    margin-right: auto;
+
+    border: calc(1.25vw * var(--screen-width)) solid;
+    border-radius: calc(15vw * var(--screen-width));
+}
+
+.overview .turret {
+    display: block;
+
+    width: 80%;
+    aspect-ratio: 1/1;
+
+    margin-left: auto;
+    margin-right: auto;
+    padding: calc(5vw * var(--screen-width));
+
+    border: calc(2.5vw * var(--screen-width)) solid;
+    border-radius: calc(15vw * var(--screen-width));
+}
+
+.overview .turret img {
+    width: 80%;
+
+    margin-top: 10%;
+    margin-left: 10%;
+
+    animation: turret 60s linear infinite;
+}
+
+.overview .stats {
+    margin-left: auto;
+    margin-right: auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 93%;
+}
+
+.overview .stats p {
+    font-size: calc(15vw * var(--screen-width));
+}
+
+.overview .stats span {
+    font-size: calc(15vw * var(--screen-width));
+}
+
+.overview .stats .symbol {
+    height: calc(10.75vw * var(--screen-width));
+    margin-right: calc(1.5vw * var(--screen-width));
+}
+
+.overview .slots {
+    margin-left: calc(3.5vw * var(--screen-width));
+}
+
+.overview .slots img {
+    width: calc(13.8vw * var(--screen-width));
+}
+
+.overview .weapons {
+    margin-bottom: calc(1.5vw * var(--screen-width));
+}
+
+.overview .otherstats {
+    margin-left: calc(3.5vw * var(--screen-width));
+}
+
+.overview .otherstats p {
+    font-size: calc(8vw * var(--screen-width));
+    white-space-collapse: preserve;
+}
+
+.overview .otherstats span {
+    font-size: calc(8vw * var(--screen-width));
+}
+
+.overview .otherstats .symbol {
+    height: calc(6.1vw * var(--screen-width));
+    margin-right: calc(1.5vw * var(--screen-width));
+}
+
+.overview .otherstats .acgt {
+    height: calc(6.1vw * var(--screen-width));
+}
+
+.turretlist {
+    display: inline-block;
+    padding-left: 0.5vw;
+}
+
+.turretlist img {
+
+    width: calc(30vw * var(--screen-width));
+    margin: calc(2vw * var(--screen-width));
+}
+
+.content {
+    display: flex;
+    align-content: center;
+    justify-content: left;
+
+    padding: 1vw;
+}
