@@ -1,7 +1,19 @@
 {% extends 'base.html' %}
 
 {% block links %}
-<link rel="stylesheet" href="{{ url_for('static', filename='styles/main.css')}}">
+    {% with turret = get_turret_info() %}
+        <link rel="preload" as="image" href="{{ url_for('static', filename='images/gg/turrets/' + turret.name + '.png')}}">
+    {% endwith %}
+    <link rel="preload" as="image" href="{{ url_for('static', filename='images/swap.png')}}">
+
+    <link rel="preload" as="image" href="{{ url_for('static', filename='images/gg/stats/HP.png')}}">
+    <link rel="preload" as="image" href="{{ url_for('static', filename='images/gg/stats/SP.png')}}">
+    <link rel="preload" as="image" href="{{ url_for('static', filename='images/gg/stats/MH.png')}}">
+    <link rel="preload" as="image" href="{{ url_for('static', filename='images/gg/stats/CR.png')}}">
+    <link rel="preload" as="image" href="{{ url_for('static', filename='images/gg/stats/CD.png')}}">
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles/main.css')}}">
+    <script src="{{ url_for('static', filename='js/turret.js')}}"></script>
 {% endblock %}
 
 {% block subtitle %}
@@ -13,7 +25,16 @@
             <div class="overview" style="border-color: {{ colours['border'] }}">
                 <h1>{{ turret.name }}</h1> 
                 <div class="turret" style="border-color: {{ colours['border-interior'] }}">
-                    <img src="{{ url_for('static', filename='images/gg/turrets/' + turret.name + '.png' )}}"/>
+                    <button class="hamburger" onclick="showGrid()"><img src="{{ url_for('static', filename='images/swap.png' )}}"/></button>
+                    <div class="turretlist" style="display: none;">
+                        {% for gridturret in get_turrets() %}
+                            <a href="{{ gridturret.name }}"><img src="{{ url_for('static', filename='images/gg/turrets/' + gridturret.name + '.png' )}}"/></a>
+                            {% if loop.index % 7 == 0 %}
+                                <br/>
+                            {% endif %}
+                        {% endfor %}
+                    </div>
+                    <button class="turreticon" onclick="showGrid()"><img src="{{ url_for('static', filename='images/gg/turrets/' + turret.name + '.png' )}}"/></button>
                 </div>
                 <h2>"{{ turret.flavor }}"</h2>
                 <div class="divider" style="border-color: {{ colours['border-interior']}}"></div>
@@ -58,13 +79,5 @@
                 <div class="otherstats"><p>{{ turret.unlock }}</span></p></div>
             </div>
         {% endwith %}
-        <div class="turretlist">
-            {% for turret in get_turrets() %}
-                <a href="{{ turret.name }}"><img class="turretimg" src="{{ url_for('static', filename='images/gg/turrets/' + turret.name + '.png' )}}"/></a>
-                {% if loop.index % 7 == 0 %}
-                    <br/>
-                {% endif %}
-            {% endfor %}
-        </div>
     {% endwith %}
 {% endblock %}

@@ -3,10 +3,6 @@
 <title>Genome Guardian Wiki</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0 user-scalable=no">
 
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@300..700&display=swap" rel="stylesheet">
-
 <link rel="stylesheet" href="{{ url_for('static', filename='styles/base.css')}}">
 
 {% block links %}{% endblock %}
@@ -15,8 +11,8 @@
   <body style="background-color: {{ colours['background'] }}">
 
     <nav> 
-      <div class="GG" style="background-color: {{ colours['navbar-left'] }};"></div>
-      <div class="CC" style="background-color: {{ colours['navbar-right'] }};"></div>
+      <div class="GG" style="border-color: {{ colours['navbar-left'] }};"><img src="{{ url_for('static', filename='images/gg/Logo.png' )}}"/></div>
+      <div class="CC" style="border-color: {{ colours['navbar-right'] }};"><img src="{{ url_for('static', filename='images/cc/Logo.png' )}}"/></div>
     </nav>
 
     <div class="subtitle">{% block subtitle %}{% endblock %}</div>

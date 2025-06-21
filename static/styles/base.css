@@ -1,8 +1,24 @@
+@font-face {
+    font-family: 'Fredoka';
+    src: url("../fonts/Fredoka-Regular.ttf") format("truetype");
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Fredoka';
+    src: url("../fonts/Fredoka-Medium.ttf") format("truetype");
+    font-weight: bold;
+    font-style: normal;
+    font-display: swap;
+}
+
 * {
     margin: 0;
     font-size: 0;
     font-family: "Fredoka", sans-serif;
-    font-weight: 400;
+    font-weight: normal;
     font-style: normal;
     color: #ffffff;
 }
@@ -14,20 +30,33 @@ nav {
 .GG,
 .CC {
     width: 50%;
-    height: 15dvh;
+    height: fit-content;
+    max-height: 10vh;
+
     display: flex;
+    justify-content: center;
+
+    border: 0.5vh solid;
+}
+
+.GG img,
+.CC img {
+    object-fit: scale-down;
+
+    width: 100%;
+    height: auto;
+    padding: 1vh;
 }
 
 
-@media (min-width: 1025px) {}
 
 @media (min-width: 768px) and (max-width: 1024px) and (orientation: landscape) {}
 
-@media (min-width: 320px) and (max-width: 767px) and (orientation: landscape) {}
+@media (max-width: 767px) and (orientation: landscape) {}
 
 @media (min-width: 768px) and (max-width: 1024px) and (orientation: portrait) {}
 
-@media (min-width: 320px) and (max-width: 767px) and (orientation: portrait) {
+@media (max-width: 767px) and (orientation: portrait) {
 
     .GG,
     .CC {
