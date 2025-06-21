@@ -202,4 +202,4 @@ def other_page(turretName):
 
 # Start the application.
 if __name__ == "__main__":
-    app.run(debug=True, host="0.0.0.0", port=80)
+    app.run(debug=True, host="0.0.0.0", port=443, ssl_context=("ssl/local.crt", "ssl/local.key"))
