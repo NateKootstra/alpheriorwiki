@@ -1,0 +1,75 @@
+{% extends 'base.html' %}
+
+{% block title %}{% with item, category, game = get_page_info() %}<title>GG Wiki: {{ item.name }}</title>{% endwith %}{% endblock %}
+
+{% block links %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles/wikipages.css')}}">
+    <script src="{{ url_for('static', filename='js/wikipages.js')}}"></script>
+{% endblock %}
+
+{% block subtitle %}
+{% endblock %}
+
+{% block content %}
+    {% with colours = get_colours() %}
+        {% with item, category, game = get_page_info() %}
+            {% block main %}{% endblock %}
+                <button class="hamburger" onclick="showGrid()"><img src="{{ url_for('static', filename='images/swap.png' )}}"/></button>
+                <div class="itemlist" style="display: none;">
+                    {% block grid %}
+                    {% endblock %}
+                </div>
+                    <button class="itemicon" onclick="showGrid()"><img src="{{ url_for('static', filename='images/' + game + '/' + category + '/' + item.name + '.png')}}"/></button>
+                </div>
+                {% if not item.flavor == "" %}
+                    <h2>"{{ item.flavor }}"</h2>
+                {% endif %}
+                {% if category == "turrets" %}
+                    <div class="divider" style="border-color: {{ colours['C']}}"></div>
+                    <div class="stats"><p>#HP{{ item.hp }}</p><p>#SP{{ item.sp }}</span></p></div>
+                    <div class="stats"><p>#HM{{ item.maxHeat }}</span></p></div>
+                    <div class="stats"><p>#CR{{ item.coolingRate }}</span></p></div>
+                    <div class="stats"><p>#CD{{ item.coolingDelay }}</span></p></div>
+                {% endif %}
+                {% if item.stats|length > 0 %}
+                    <div class="divider" style="border-color: {{ colours['C']}}"></div>
+                {% endif %}
+                {% for stat in item.stats %}
+                    <div class="otherstats"><p>{{ stat }}</p></div>
+                {% endfor %}
+                {% if item.mechanics|length > 0 %}
+                    <div class="divider" style="border-color: {{ colours['C']}}"></div>
+                {% endif %}
+                {% for mechanic in item.mechanics %}
+                    <div class="otherstats"><p>{% if loop.index > 1 %}<br/>{% endif %}- {{ mechanic }}</p></div>
+                {% endfor %}
+                {% if not item.weapons == None %}
+                    <div class="divider" style="border-color: {{ colours['C']}}"></div>
+                    {% for weapon in item.weapons %}
+                        <div class="slots weapons">
+                            {% for i in range(weapon[0]) %}
+                                {% if i < item.openSlots %}
+                                    <img src="{{ url_for('static', filename='images/gg/slots/WepOpen.png' )}}"/>
+                                {% else %}
+                                    <img src="{{ url_for('static', filename='images/gg/slots/WepClosed.png' )}}"/>
+                                {% endif %}
+                            {% endfor %}
+                        </div>
+                        <div class="slots">
+                            {% for i in range(weapon[1]) %}
+                                {% if i < item.openSlots %}
+                                    <img src="{{ url_for('static', filename='images/gg/slots/ModOpen.png' )}}"/>
+                                {% else %}
+                                    <img src="{{ url_for('static', filename='images/gg/slots/ModClosed.png' )}}"/>
+                                {% endif %}
+                            {% endfor %}
+                        </div>
+                    {% endfor %}
+                {% endif %}
+                
+                <div class="divider" style="border-color: {{ colours['C']}}"></div>
+                <div class="otherstats" style="text-align: center"><p>{{ item.unlock }}</span></p></div>
+            </div>
+        {% endwith %}
+    {% endwith %}
+{% endblock %}

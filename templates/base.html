@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0 user-scalable=no">
 
 <link rel="stylesheet" href="{{ url_for('static', filename='styles/base.css')}}">
+<script src="{{ url_for('static', filename='js/base.js')}}"></script>
 
 {% block links %}{% endblock %}
 
@@ -23,10 +24,8 @@
   {% endif %}
 {% endwith %}
 
-
-
 {% with colours = get_colours() %}
-  <body style="background-color: {{ colours['background'] }}">
+  <body id="mainpage" style="visibility: hidden; background-color: {{ colours['background'] }}">
 
     <nav>
       {% with section = get_section() %}

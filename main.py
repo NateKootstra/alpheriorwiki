@@ -178,25 +178,23 @@ def get_section():
     return "index"
 app.jinja_env.globals.update(get_section=get_section)
 
-def get_turret_info():
-    for i,turret in enumerate(turrets):
-        if turret.name == request.path.split("/")[-1]:
-            if turret.name == "Jester":
-                turret.flavor = jester.getFlavor()
-                turret.hp = random.randint(20, 60)
-                turret.maxHeat = random.randint(50, 200)
-                turret.coolingRate = random.randint(50, 200)
-                turret.coolingDelay = round(random.randint(50, 200) * 0.01, 2)
-            return turret
+def get_page_info():
+    if request.path.split("/")[2] == "turrets":
+        for i,turret in enumerate(turrets):
+            if turret.name == request.path.split("/")[-1]:
+                if turret.name == "Jester":
+                    turret.flavor = jester.getFlavor()
+                    turret.hp = random.randint(20, 60)
+                    turret.maxHeat = random.randint(50, 200)
+                    turret.coolingRate = random.randint(50, 200)
+                    turret.coolingDelay = round(random.randint(50, 200) * 0.01, 2)
+                return turret, 'turrets', 'gg'
+    elif request.path.split("/")[2] == "perks":
+        for i,perk in enumerate(perks):
+            if perk.name == request.path.split("/")[-1]:
+                return perk, 'perks', 'gg'
     return 404
-app.jinja_env.globals.update(get_turret_info=get_turret_info)
-
-def get_perk_info():
-    for i,perk in enumerate(perks):
-        if perk.name == request.path.split("/")[-1]:
-            return perk
-    return 404
-app.jinja_env.globals.update(get_perk_info=get_perk_info)
+app.jinja_env.globals.update(get_page_info=get_page_info)
 
 def get_template(path):
     global replace
@@ -217,7 +215,6 @@ def get_template(path):
         template = template.replace("Delay -" + str(i), "Delay <span style='color: #00ff00; font-weight: bold;'>-" + str(i))
         template = template.replace(" +" + str(i), " <span style='color: #00ff00; font-weight: bold;'>+" + str(i))
         template = template.replace(" -" + str(i), " <span style='color: #ff0000; font-weight: bold;'>-" + str(i))
-        template = template.replace(str(i) + "%", str(i) + "%</span>")
     template = template.replace("$", "</span>")
     return render_template_string(template)
 

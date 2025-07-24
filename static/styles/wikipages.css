@@ -34,6 +34,17 @@
     text-align: center;
 }
 
+.overview h2 {
+    width: 100%;
+
+    margin-top: calc(5vw * var(--screen-width));
+
+    font-size: calc(7vw * var(--screen-width));
+    font-weight: normal;
+    font-style: italic;
+    text-align: center;
+}
+
 .overview .divider {
     width: 92%;
 
@@ -47,7 +58,7 @@
     border-radius: calc(15vw * var(--screen-width));
 }
 
-.overview .perk {
+.overview .item {
     display: block;
 
     width: 80%;
@@ -61,36 +72,7 @@
     border-radius: calc(15vw * var(--screen-width));
 }
 
-.overview .perk .hamburger {
-    position: absolute;
-
-    border: none;
-    background: none;
-}
-
-.overview .perk .hamburger img {
-    width: calc(15vw * var(--screen-width));
-}
-
-.overview .perk .perklist {
-    position: absolute;
-}
-
-.overview .perk .perklist a {
-    display: inline-block;
-
-    width: calc(7.65vw * var(--screen-width));
-    margin: calc(0.1vw * var(--screen-width));
-}
-
-.overview .perk .perklist a img {
-    width: 100%;
-    height: 100%;
-
-    object-fit: scale-down;
-}
-
-.overview .perk .perkicon {
+.overview .item .itemicon {
     border: none;
     background: none;
 
@@ -98,31 +80,66 @@
     height: 100%;
 }
 
-.overview .perk .perkicon img {
-    visibility: visible;
+.overview .item .itemicon img {
 
-    width: 70%;
+    width: 80%;
+
+    animation: item 60s linear infinite;
 }
 
-.overview .info {
+.overview .stats {
+    margin-left: auto;
+    margin-right: auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 93%;
+}
+
+.overview .stats p {
+    font-size: calc(15vw * var(--screen-width));
+}
+
+.overview .stats span {
+    font-size: calc(15vw * var(--screen-width));
+}
+
+.overview .stats .symbol {
+    height: calc(10.75vw * var(--screen-width));
+    margin-right: calc(1.5vw * var(--screen-width));
+}
+
+.overview .slots {
     margin-left: calc(3.5vw * var(--screen-width));
 }
 
-.overview .info p {
-    font-size: calc(7.6vw * var(--screen-width));
+.overview .slots img {
+    width: calc(13.8vw * var(--screen-width));
+}
+
+.overview .weapons {
+    margin-bottom: calc(1.5vw * var(--screen-width));
+}
+
+.overview .otherstats {
+    margin-left: calc(3.5vw * var(--screen-width));
+}
+
+.overview .otherstats p {
+    font-size: calc(8vw * var(--screen-width));
     white-space-collapse: preserve;
 }
 
-.overview .info span {
-    font-size: calc(7.6vw * var(--screen-width));
+.overview .otherstats span {
+    font-size: calc(8vw * var(--screen-width));
 }
 
-.overview .info .symbol {
-    height: calc(5.8vw * var(--screen-width));
-    margin-right: calc(1.4vw * var(--screen-width));
+.overview .otherstats .symbol {
+    height: calc(6.1vw * var(--screen-width));
+    margin-right: calc(1.5vw * var(--screen-width));
 }
 
-.overview .info .acgt {
+.overview .otherstats .acgt {
     height: calc(6.1vw * var(--screen-width));
 }
 

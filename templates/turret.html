@@ -1,86 +1,42 @@
-{% extends 'base.html' %}
+{% extends 'wikipages.html' %}
 
-{% block title %}{% with turret = get_turret_info() %}<title>GG Wiki: {{ turret.name }}</title>{% endwith %}{% endblock %}
-
-{% block links %}
-    {% with turret = get_turret_info() %}
-        <link rel="preload" as="image" href="{{ url_for('static', filename='images/gg/turrets/' + turret.name + '.png')}}">
-    {% endwith %}
-    <link rel="preload" as="image" href="{{ url_for('static', filename='images/swap.png')}}">
-
-    <link rel="preload" as="image" href="{{ url_for('static', filename='images/gg/stats/HP.png')}}">
-    <link rel="preload" as="image" href="{{ url_for('static', filename='images/gg/stats/SP.png')}}">
-    <link rel="preload" as="image" href="{{ url_for('static', filename='images/gg/stats/MH.png')}}">
-    <link rel="preload" as="image" href="{{ url_for('static', filename='images/gg/stats/CR.png')}}">
-    <link rel="preload" as="image" href="{{ url_for('static', filename='images/gg/stats/CD.png')}}">
-
-    <link rel="stylesheet" href="{{ url_for('static', filename='styles/gg.css')}}">
-    <link rel="stylesheet" href="{{ url_for('static', filename='styles/turrets.css')}}">
-    <script src="{{ url_for('static', filename='js/turret.js')}}"></script>
-{% endblock %}
-
-{% block subtitle %}
-{% endblock %}
-
-{% block content %}
+{% block main %}
     {% with colours = get_colours() %}
-        {% with turret = get_turret_info() %}
+        {% with item, category, game = get_page_info() %}
             <div class="overview" style="border-color: {{ colours['A'] }}">
-                <h1>{{ turret.name }}</h1> 
-                <div class="turret" style="border-color: {{ colours['C'] }}">
-                    <button class="hamburger" onclick="showGrid()"><img src="{{ url_for('static', filename='images/swap.png' )}}"/></button>
-                    <div class="turretlist" style="display: none;">
-                        {% for gridturret in get_turrets() %}
-                            <a href="{{ gridturret.name }}"><img src="{{ url_for('static', filename='images/gg/turrets/' + gridturret.name + '.png' )}}"/></a>
-                            {% if loop.index % 7 == 0 %}
-                                <br/>
-                            {% endif %}
-                        {% endfor %}
-                    </div>
-                    <button class="turreticon" onclick="showGrid()"><img src="{{ url_for('static', filename='images/gg/turrets/' + turret.name + '.png' )}}"/></button>
-                </div>
-                <h2>"{{ turret.flavor }}"</h2>
-                <div class="divider" style="border-color: {{ colours['C']}}"></div>
-                <div class="stats"><p>#HP{{ turret.hp }}</p><p>#SP{{ turret.sp }}</span></p></div>
-                <div class="stats"><p>#HM{{ turret.maxHeat }}</span></p></div>
-                <div class="stats"><p>#CR{{ turret.coolingRate }}</span></p></div>
-                <div class="stats"><p>#CD{{ turret.coolingDelay }}</span></p></div>
-                {% if turret.stats|length > 0 %}
-                    <div class="divider" style="border-color: {{ colours['C']}}"></div>
-                {% endif %}
-                {% for stat in turret.stats %}
-                    <div class="otherstats"><p>{{ stat }}</p></div>
-                {% endfor %}
-                {% if turret.mechanics|length > 0 %}
-                    <div class="divider" style="border-color: {{ colours['C']}}"></div>
-                {% endif %}
-                {% for mechanic in turret.mechanics %}
-                    <div class="otherstats"><p>{% if loop.index > 1 %}<br/>{% endif %}- {{ mechanic }}</p></div>
-                {% endfor %}
-                <div class="divider" style="border-color: {{ colours['C']}}"></div>
-                {% for weapon in turret.weapons %}
-                    <div class="slots weapons">
-                        {% for i in range(weapon[0]) %}
-                            {% if i < turret.openSlots %}
-                                <img src="{{ url_for('static', filename='images/gg/slots/WepOpen.png' )}}"/>
-                            {% else %}
-                                <img src="{{ url_for('static', filename='images/gg/slots/WepClosed.png' )}}"/>
-                            {% endif %}
-                        {% endfor %}
-                    </div>
-                    <div class="slots">
-                        {% for i in range(weapon[1]) %}
-                            {% if i < turret.openSlots %}
-                                <img src="{{ url_for('static', filename='images/gg/slots/ModOpen.png' )}}"/>
-                            {% else %}
-                                <img src="{{ url_for('static', filename='images/gg/slots/ModClosed.png' )}}"/>
-                            {% endif %}
-                        {% endfor %}
-                    </div>
-                {% endfor %}
-                <div class="divider" style="border-color: {{ colours['C']}}"></div>
-                <div class="otherstats" style="text-align: center"><p>{{ turret.unlock }}</span></p></div>
-            </div>
+                <h1>{{ item.name }}</h1> 
+                <div class="item" style="border-color: {{ colours['C'] }}">
         {% endwith %}
     {% endwith %}
+{% endblock %}
+
+{% block grid %}
+    <style>
+        .overview .item .hamburger {
+            position: absolute;
+        
+            border: none;
+            background: none;
+        }
+        
+        .overview .item .hamburger img {
+            width: calc(15vw * var(--screen-width));
+        }
+        
+        .overview .item .itemlist {
+            position: absolute;
+        }
+        
+        .overview .item .itemlist img {
+            width: calc(11vw * var(--screen-width));
+            margin: calc(0.1vw * var(--screen-width));
+        }
+    </style>
+
+    {% for gridturret in get_turrets() %}
+        <a href="{{ gridturret.name }}"><img src="{{ url_for('static', filename='images/gg/turrets/' + gridturret.name + '.png' )}}"/></a>
+        {% if loop.index % 7 == 0 %}
+            <br/>
+        {% endif %}
+    {% endfor %}
 {% endblock %}
