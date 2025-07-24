@@ -1,9 +1,10 @@
 import random
 
-from flask import Flask, redirect, render_template, render_template_string, make_response, request, send_from_directory, url_for
-from info import turrets
-import jester
+from flask import Flask, redirect, render_template, render_template_string, make_response, request, send_from_directory, url_for, send_file
 import os.path
+
+from info import turrets, perks
+import jester
 
 app = Flask(__name__)
 
@@ -35,6 +36,7 @@ replace = {
     "#TS": "<img class=\"symbol\" style=\"display: inline;\" src=\"{{ url_for('static', filename='images/gg/stats/SCL.png' )}}\"/><span style=\"color: #cfff40; font-weight: bold;\">",
     "#MS": "<img class=\"symbol\" style=\"display: inline;\" src=\"{{ url_for('static', filename='images/gg/stats/MS.png' )}}\"/><span style=\"color: #40ff70; font-weight: bold;\">",
     "#RR": "<img class=\"symbol\" style=\"display: inline;\" src=\"{{ url_for('static', filename='images/gg/stats/RR.png' )}}\"/><span style=\"color: #ffffff; font-weight: bold;\">",
+    "#BN": "<img class=\"symbol\" style=\"display: inline;\" src=\"{{ url_for('static', filename='images/gg/stats/BN.png' )}}\"/><span style=\"color: #a0a0ff; font-weight: bold;\">",
     
     "#Explosive": "<img class=\"symbol\" style=\"display: inline;\" src=\"{{ url_for('static', filename='images/gg/stats/Explosive.png' )}}\"/><span style=\"color: #ffff00; font-weight: bold;\">",
     "#Area": "<img class=\"symbol\" style=\"display: inline;\" src=\"{{ url_for('static', filename='images/gg/stats/Area.png' )}}\"/><span style=\"color: #dfff00; font-weight: bold;\">",
@@ -107,7 +109,7 @@ replaceFull = {
     "Firerate": replace["#FRT"] + "Firerate",
     "CriticalHits": replace["#CRT"] + "Critical Hits",
     "CriticalChance": replace["#CRT"] + "Critical Chance",
-    "CriticalDamage": replace["#CRT"] + "Critical Damage",
+    "CriticalDamage": replace["#CRT"] + "Critical " + replace["#DMG"] + "</span></span><span style=\"color: #ff7040; font-weight: bold;\">Damage",
     "Accuracy": replace["#ACC"] + "Accuracy",
     "Range": replace["#RNG"] + "Range",
     "Speed": replace["#SPD"] + "Speed",
@@ -132,6 +134,7 @@ replaceFull = {
     "Offspring": replace["#Offspring"] + "Offspring",
     
     "Reroll": replace["#RR"] + "Reroll",
+    "Banish": replace["#BN"] + "Banish",
     
     "Depth": replace["#Abyss"] + "Depth",
     "Mark": replace["#Mark"] + "Mark",
@@ -143,10 +146,11 @@ replaceFull = {
 def get_colours():
     colours = {
         "background" : "#000000",
-        "navbar-left" : "#ff40ff",
-        "navbar-right" : "#a0ff40",
-        "border" : "#ff40ff",
-        "border-interior" : "#40ffff"
+        "A" : "#ff40ff",
+        "C" : "#40ffff",
+        "G" : "#a0ff40",
+        "T" : "#ffff40",
+        "Abyss" : "#a040ff",
     }
     return colours
 app.jinja_env.globals.update(get_colours=get_colours)
@@ -154,6 +158,25 @@ app.jinja_env.globals.update(get_colours=get_colours)
 def get_turrets():
     return turrets
 app.jinja_env.globals.update(get_turrets=get_turrets)
+
+def get_perks():
+    return perks
+app.jinja_env.globals.update(get_perks=get_perks)
+
+def get_section():
+    try:
+        if request.path == "/gg":
+            return "ggt"
+        elif request.path == "/cc":
+            return "cct"
+        elif request.path.split("/")[1] == "gg":
+            return "gg"
+        elif request.path.split("/")[1] == "cc":
+            return "cc"
+    except:
+        pass
+    return "index"
+app.jinja_env.globals.update(get_section=get_section)
 
 def get_turret_info():
     for i,turret in enumerate(turrets):
@@ -165,8 +188,15 @@ def get_turret_info():
                 turret.coolingRate = random.randint(50, 200)
                 turret.coolingDelay = round(random.randint(50, 200) * 0.01, 2)
             return turret
-    return []
+    return 404
 app.jinja_env.globals.update(get_turret_info=get_turret_info)
+
+def get_perk_info():
+    for i,perk in enumerate(perks):
+        if perk.name == request.path.split("/")[-1]:
+            return perk
+    return 404
+app.jinja_env.globals.update(get_perk_info=get_perk_info)
 
 def get_template(path):
     global replace
@@ -179,8 +209,12 @@ def get_template(path):
     for key in replaceFull.keys():
         template = template.replace("$" + key, replaceFull[key])
     for i in range(10):
+        template = template.replace("Health +" + str(i), "Health <span style='color: #ff4040; font-weight: bold;'>+" + str(i))
+        template = template.replace("Health -" + str(i), "Health <span style='color: #ff4040; font-weight: bold;'>-" + str(i))
         template = template.replace("Turret Scale +" + str(i), "Turret Scale <span style='color: #fffff; font-weight: bold;'>+" + str(i))
         template = template.replace("Turret Scale -" + str(i), "Turret Scale <span style='color: #fffff; font-weight: bold;'>-" + str(i))
+        template = template.replace("Delay +" + str(i), "Delay <span style='color: #ff0000; font-weight: bold;'>+" + str(i))
+        template = template.replace("Delay -" + str(i), "Delay <span style='color: #00ff00; font-weight: bold;'>-" + str(i))
         template = template.replace(" +" + str(i), " <span style='color: #00ff00; font-weight: bold;'>+" + str(i))
         template = template.replace(" -" + str(i), " <span style='color: #ff0000; font-weight: bold;'>-" + str(i))
         template = template.replace(str(i) + "%", str(i) + "%</span>")
@@ -190,16 +224,36 @@ def get_template(path):
 # Public facing pages.
 @app.route("/")
 def index():
-    return redirect(request.url_root + "gg/turrets/Guardian")
+    return get_template('index.html')
+
+@app.route("/gg")
+def gg():
+    return get_template('gg.html')
+
+@app.route("/cc")
+def cc():
+    return get_template('cc.html')
 
 @app.route("/gg/turrets/<turretName>")
-def other_page(turretName):
+def turret(turretName):
     for turret in turrets:
         if turret.name == turretName:
             return get_template('turret.html')
     return "Turret Not Found"
 
+@app.route("/gg/perks/<perkName>")
+def perk(perkName):
+    for perk in perks:
+        if perk.name == perkName:
+            return get_template('perk.html')
+    return "Perk Not Found"
+
+
+# Privately facing pages.
+@app.route("/favicons/<favicon>")
+def favicon(favicon):
+    return send_file("static/images/favicons/" + favicon + ".png", "image/png")
 
 # Start the application.
 if __name__ == "__main__":
-    app.run(debug=True, host="0.0.0.0", port=443, ssl_context=("ssl/local.crt", "ssl/local.key"))
+    app.run(debug=True, host="0.0.0.0", port=80)

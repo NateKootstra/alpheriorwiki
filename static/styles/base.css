@@ -14,29 +14,107 @@
     font-display: swap;
 }
 
+@font-face {
+    font-family: 'Blogger Sans';
+    src: url("../fonts/Blogger-Sans-Regular.ttf") format("truetype");
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Blogger Sans';
+    src: url("../fonts/Blogger-Sans-Medium.ttf") format("truetype");
+    font-weight: bold;
+    font-style: normal;
+    font-display: swap;
+}
+
+@keyframes turret {
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+@keyframes perk {
+    0% {
+        filter: drop-shadow(0 0 0 #ff40ff) drop-shadow(0 0 0 #a0ff40);
+    }
+
+    25% {
+        filter: drop-shadow(calc(-3vw * var(--screen-width)) 0 0 #ff40ff) drop-shadow(0 0 0 #a0ff40);
+    }
+
+    50% {
+        filter: drop-shadow(0 0 0 #ff40ff) drop-shadow(0 0 0 #a0ff40);
+    }
+
+    75% {
+        filter: drop-shadow(0 0 0 #ff40ff) drop-shadow(calc(3vw * var(--screen-width)) 0 0 #a0ff40);
+    }
+
+    100% {
+        filter: drop-shadow(0 0 0 #ff40ff) drop-shadow(0 0 0 #a0ff40);
+    }
+}
+
+@keyframes weapon {
+    0% {
+        filter: blur(0);
+    }
+
+    50% {
+        filter: blur(calc(10vw * var(--screen-width)));
+    }
+
+    100% {
+        filter: blur(0)
+    }
+}
+
 * {
     margin: 0;
     font-size: 0;
-    font-family: "Fredoka", sans-serif;
     font-weight: normal;
     font-style: normal;
-    color: #ffffff;
+    color: white;
+    text-decoration: none;
+}
+
+h1.title {
+    width: 100%;
+
+    border-bottom: 0.5vh white solid;
+
+    font-size: 7.1vh;
+    text-align: center;
 }
 
 nav {
     display: flex;
+    height: fit-content;
 }
 
 .GG,
 .CC {
     width: 50%;
+}
+
+.GG div,
+.CC div {
+    width: 100%;
     height: fit-content;
-    max-height: 10vh;
+    height: 10vh;
 
     display: flex;
     justify-content: center;
 
     border: 0.5vh solid;
+    box-sizing: border-box;
 }
 
 .GG img,
@@ -48,18 +126,4 @@ nav {
     padding: 1vh;
 }
 
-
-
-@media (min-width: 768px) and (max-width: 1024px) and (orientation: landscape) {}
-
-@media (max-width: 767px) and (orientation: landscape) {}
-
-@media (min-width: 768px) and (max-width: 1024px) and (orientation: portrait) {}
-
-@media (max-width: 767px) and (orientation: portrait) {
-
-    .GG,
-    .CC {
-        height: 30dvh;
-    }
-}
+@media (max-width: 767px) and (orientation: portrait) {}

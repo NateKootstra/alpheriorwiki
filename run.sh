@@ -1,0 +1,1 @@
+sudo gunicorn -w 8 -b 0.0.0.0:443 --certfile=ssl/local.crt --keyfile=ssl/local.key main:app

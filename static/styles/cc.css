@@ -1,0 +1,24 @@
+* {
+    font-family: "Blogger Sans", sans-serif;
+}
+
+.GG {
+    width: 35%;
+}
+
+.CC {
+    width: 65%;
+}
+
+h1.title {
+    margin-top: 1.45vh;
+
+    font-size: 8vh;
+}
+
+@media (max-width: 767px) and (orientation: portrait) {
+    h1.title {
+        margin-top: 0.9vh;
+        font-size: 4vh;
+    }
+}

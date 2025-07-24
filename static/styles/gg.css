@@ -1,0 +1,29 @@
+* {
+    font-family: "Fredoka", sans-serif;
+}
+
+.GG {
+    width: 65%;
+}
+
+.CC {
+    width: 35%;
+}
+
+h1.title {
+    padding-bottom: 0.5vh;
+
+    font-size: 8vh;
+}
+
+.page div {
+    justify-content: center;
+}
+
+@media (max-width: 767px) and (orientation: portrait) {
+    h1.title {
+        padding-bottom: 0.25vh;
+
+        font-size: 4vh;
+    }
+}

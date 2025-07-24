@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+
+{% block title %}<title>Genome Guardian Wiki</title>{% endblock %}
+
+{% block links %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles/main.css')}}">
+{% endblock %}
+
+{% block content %}
+    <h1 class="title">Genome Guardian Pages</h1>
+    {% with colours = get_colours() %}
+        <div class="pages">
+            <a href="/gg/turrets/Guardian">
+                <div class="page" style="border-color: {{ colours['A'] }}">
+                    <div><img src="{{ url_for('static', filename='images/gg/turrets/Guardian.png' )}}" style="animation: turret 60s linear infinite;"/></div>
+                    <h1 style="border-color: {{ colours['A'] }}">Turrets</h1>
+                </div>
+            </a>
+            <a class="WIP">
+            <div class="page" style="border-color: {{ colours['C'] }};">
+                <div><img src="{{ url_for('static', filename='images/gg/perks/Rime.png' )}}" style="animation: perk 10s ease-in-out infinite;"/></div>
+                <h1 style="border-color: {{ colours['C'] }}">Perks</h1>
+            </div>
+            </a>
+            <a class="WIP">
+            <div class="page" style="border-color: {{ colours['G'] }}">
+                <div style="grid-template-columns: 1fr;">
+                    <img src="{{ url_for('static', filename='images/gg/weapons/CGTT.png' )}}"/>
+                    <img src="{{ url_for('static', filename='images/gg/weapons/CGTT.png' )}}" style="animation: weapon 10s linear infinite;"/>
+                </div>
+                <h1 style="border-color: {{ colours['G'] }}">Weapons</h1>
+            </div>
+            </a>
+            <a class="WIP">
+            <div class="page" style="border-color: {{ colours['T'] }}">
+                <div><img src="{{ url_for('static', filename='images/gg/microbes/GGGT.png' )}}"/></div>
+                <h1 style="border-color: {{ colours['T'] }}">Microbes</h1>
+            </div>
+            </a>
+            <a class="WIP">
+            <div class="page" style="border-color: {{ colours['Abyss'] }}">
+                <div><img src="{{ url_for('static', filename='images/gg/modes/Extract.png' )}}"/></div>
+                <h1 style="border-color: {{ colours['Abyss'] }}">Modes</h1>
+            </div>
+            </a>
+        </div>
+    {% endwith %}
+{% endblock %}

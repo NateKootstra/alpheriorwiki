@@ -1,0 +1,62 @@
+{% extends 'base.html' %}
+
+{% block title %}{% with perk = get_perk_info() %}<title>GG Wiki: {{ perk.name }}</title>{% endwith %}{% endblock %}
+
+{% block links %}
+    {% with perk = get_perk_info() %}
+        <link rel="preload" as="image" href="{{ url_for('static', filename='images/gg/perks/' + perk.name + '.png')}}">
+    {% endwith %}
+    <link rel="preload" as="image" href="{{ url_for('static', filename='images/swap.png')}}">
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles/gg.css')}}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles/perks.css')}}">
+    <script src="{{ url_for('static', filename='js/perk.js')}}"></script>
+{% endblock %}
+
+{% block subtitle %}
+{% endblock %}
+
+{% block content %}
+    {% with colours = get_colours() %}
+        {% with perk = get_perk_info() %}
+            <div class="overview" style="border-color: {{ colours['C'] }}">
+                <h1>{{ perk.name }}</h1> 
+                <div class="perk" style="border-color: {{ colours['G'] }}">
+                    <button class="hamburger" onclick="showGrid()"><img src="{{ url_for('static', filename='images/swap.png' )}}"/></button>
+                    {% set ns = namespace(counter=0) %}
+                    <div class="perklist" style="display: none;">
+                        {% for gridperk in get_perks() %}
+                            {% if ns.counter == 90 %}
+                                <br/>
+                            {% endif %}
+                            {% if ns.counter == 0 or ns.counter == 9 or ns.counter == 90 %}
+                                <a>a</a>
+                                {% set ns.counter = ns.counter + 1 %}
+                            {% endif %}
+                            {% if ns.counter % 10 == 0 %}
+                                <br/>
+                            {% endif %}
+                            <a href="{{ gridperk.name }}"><img src="{{ url_for('static', filename='images/gg/perks/' + gridperk.name + '.png' )}}"/></a>
+                            {% set ns.counter = ns.counter + 1 %}
+                        {% endfor %}
+                    </div>
+                    <button class="perkicon" onclick="showGrid()"><img src="{{ url_for('static', filename='images/gg/perks/' + perk.name + '.png' )}}"/></button>
+                </div>
+                {% if perk.stats|length > 0 %}
+                    <div class="divider" style="border-color: {{ colours['G']}}"></div>
+                {% endif %}
+                {% for stat in perk.stats %}
+                    <div class="info"><p>{{ stat }}</p></div>
+                {% endfor %}
+                {% if perk.mechanics|length > 0 %}
+                    <div class="divider" style="border-color: {{ colours['G']}}"></div>
+                {% endif %}
+                {% for mechanic in perk.mechanics %}
+                    <div class="info"><p>{% if loop.index > 1 %}<br/>{% endif %}- {{ mechanic }}</p></div>
+                {% endfor %}
+                <div class="divider" style="border-color: {{ colours['G']}}"></div>
+                <div class="info" style="text-align: center"><p>{{ perk.unlock }}</span></p></div>
+            </div>
+        {% endwith %}
+    {% endwith %}
+{% endblock %}

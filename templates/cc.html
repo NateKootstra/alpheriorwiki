@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+
+{% block title %}<title>Cell Command Wiki</title>{% endblock %}
+
+{% block links %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles/main.css')}}">
+{% endblock %}
+
+{% block content %}
+    <h1 class="title">Cell Command Pages</h1>
+    {% with colours = get_colours() %}
+        <div class="pages">
+            <a class="WIP">
+                <div class="page" style="border-color: {{ colours['G'] }}">
+                    <div><img src="{{ url_for('static', filename='images/cc/commanders/Prime.png' )}}"/></div>
+                    <h1 style="border-color: {{ colours['G'] }}">Commanders</h1>
+                </div>
+            </a>
+            <a class="WIP">
+            <div class="page" style="border-color: {{ colours['T'] }}">
+                <div><img src="{{ url_for('static', filename='images/cc/perks/Grapple.png' )}}"/></div>
+                <h1 style="border-color: {{ colours['T'] }}">Perks</h1>
+            </div>
+            </a>
+            <a class="WIP">
+            <div class="page" style="border-color: {{ colours['A'] }}">
+                <div><img src="{{ url_for('static', filename='images/cc/ccells/A.png' )}}"/></div>
+                <h1 style="border-color: {{ colours['A'] }}">Com Cells</h1>
+            </div>
+            </a>
+            <a class="WIP">
+            <div class="page" style="border-color: {{ colours['C'] }}">
+                <div><img src="{{ url_for('static', filename='images/cc/acells/C.png' )}}"/></div>
+                <h1 style="border-color: {{ colours['C'] }}">Abyss Cells</h1>
+            </div>
+            </a>
+            <a class="WIP">
+                <div class="page" style="border-color: {{ colours['Abyss'] }}">
+                    <div><img src="{{ url_for('static', filename='images/cc/modes/Virus.png' )}}"/></div>
+                    <h1 style="border-color: {{ colours['Abyss'] }}">Modes</h1>
+                </div>
+            </a>
+        </div>
+    {% endwith %}
+{% endblock %}

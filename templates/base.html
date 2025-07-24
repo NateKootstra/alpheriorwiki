@@ -1,21 +1,53 @@
 <!doctype html>
 
-<title>Genome Guardian Wiki</title>
+{% block title%}{% endblock %}
+
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0 user-scalable=no">
 
 <link rel="stylesheet" href="{{ url_for('static', filename='styles/base.css')}}">
 
 {% block links %}{% endblock %}
 
+{% with section = get_section() %}
+  {% if section == "gg" or section == "ggt" %}
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicons/gg-32x32">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicons/gg-16x16">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles/gg.css')}}">
+  {% elif section == "cc" or section == "cct" %}
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicons/cc-32x32">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicons/cc-16x16">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles/cc.css')}}">
+  {% else %}
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicons/base-32x32">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicons/base-16x16">
+  {% endif %}
+{% endwith %}
+
+
+
 {% with colours = get_colours() %}
   <body style="background-color: {{ colours['background'] }}">
 
-    <nav> 
-      <div class="GG" style="border-color: {{ colours['navbar-left'] }};"><img src="{{ url_for('static', filename='images/gg/Logo.png' )}}"/></div>
-      <div class="CC" style="border-color: {{ colours['navbar-right'] }};"><img src="{{ url_for('static', filename='images/cc/Logo.png' )}}"/></div>
+    <nav>
+      {% with section = get_section() %}
+        {% if section == "ggt" %}
+          <a class="GG" href="/"><div style="border-color: {{ colours['A'] }};"><img src="{{ url_for('static', filename='images/gg/Logo.png' )}}"/></div></a>
+          <a class="CC" href="/cc"><div style="border-color: {{ colours['G'] }};"><img src="{{ url_for('static', filename='images/cc/Logo.png' )}}"/></div></a>
+        {% elif section == "gg" %}
+          <a class="GG" href="/gg"><div style="border-color: {{ colours['A'] }};"><img src="{{ url_for('static', filename='images/gg/Logo.png' )}}"/></div></a>
+          <a class="CC" href="/cc"><div style="border-color: {{ colours['G'] }};"><img src="{{ url_for('static', filename='images/cc/Logo.png' )}}"/></div></a>
+        {% elif section == "cct" %}
+          <a class="GG" href="/gg"><div style="border-color: {{ colours['A'] }};"><img src="{{ url_for('static', filename='images/gg/Logo.png' )}}"/></div></a>
+          <a class="CC" href="/"><div style="border-color: {{ colours['G'] }};"><img src="{{ url_for('static', filename='images/cc/Logo.png' )}}"/></div></a>
+        {% elif section == "cc" %}
+          <a class="GG" href="/gg"><div style="border-color: {{ colours['A'] }};"><img src="{{ url_for('static', filename='images/gg/Logo.png' )}}"/></div></a>
+          <a class="CC" href="/cc"><div style="border-color: {{ colours['G'] }};"><img src="{{ url_for('static', filename='images/cc/Logo.png' )}}"/></div></a>
+        {% elif section %}
+          <a class="GG" href="/gg"><div style="border-color: {{ colours['A'] }};"><img src="{{ url_for('static', filename='images/gg/Logo.png' )}}"/></div></a>
+          <a class="CC" href="/cc"><div style="border-color: {{ colours['G'] }};"><img src="{{ url_for('static', filename='images/cc/Logo.png' )}}"/></div></a>
+        {% endif %}
+      {% endwith %}
     </nav>
-
-    <div class="subtitle">{% block subtitle %}{% endblock %}</div>
 
     <div class="content">
       {% block content %}{% endblock %}

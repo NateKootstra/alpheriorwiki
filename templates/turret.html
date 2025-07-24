@@ -1,5 +1,7 @@
 {% extends 'base.html' %}
 
+{% block title %}{% with turret = get_turret_info() %}<title>GG Wiki: {{ turret.name }}</title>{% endwith %}{% endblock %}
+
 {% block links %}
     {% with turret = get_turret_info() %}
         <link rel="preload" as="image" href="{{ url_for('static', filename='images/gg/turrets/' + turret.name + '.png')}}">
@@ -12,7 +14,8 @@
     <link rel="preload" as="image" href="{{ url_for('static', filename='images/gg/stats/CR.png')}}">
     <link rel="preload" as="image" href="{{ url_for('static', filename='images/gg/stats/CD.png')}}">
 
-    <link rel="stylesheet" href="{{ url_for('static', filename='styles/main.css')}}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles/gg.css')}}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles/turrets.css')}}">
     <script src="{{ url_for('static', filename='js/turret.js')}}"></script>
 {% endblock %}
 
@@ -22,9 +25,9 @@
 {% block content %}
     {% with colours = get_colours() %}
         {% with turret = get_turret_info() %}
-            <div class="overview" style="border-color: {{ colours['border'] }}">
+            <div class="overview" style="border-color: {{ colours['A'] }}">
                 <h1>{{ turret.name }}</h1> 
-                <div class="turret" style="border-color: {{ colours['border-interior'] }}">
+                <div class="turret" style="border-color: {{ colours['C'] }}">
                     <button class="hamburger" onclick="showGrid()"><img src="{{ url_for('static', filename='images/swap.png' )}}"/></button>
                     <div class="turretlist" style="display: none;">
                         {% for gridturret in get_turrets() %}
@@ -37,24 +40,24 @@
                     <button class="turreticon" onclick="showGrid()"><img src="{{ url_for('static', filename='images/gg/turrets/' + turret.name + '.png' )}}"/></button>
                 </div>
                 <h2>"{{ turret.flavor }}"</h2>
-                <div class="divider" style="border-color: {{ colours['border-interior']}}"></div>
+                <div class="divider" style="border-color: {{ colours['C']}}"></div>
                 <div class="stats"><p>#HP{{ turret.hp }}</p><p>#SP{{ turret.sp }}</span></p></div>
                 <div class="stats"><p>#HM{{ turret.maxHeat }}</span></p></div>
                 <div class="stats"><p>#CR{{ turret.coolingRate }}</span></p></div>
                 <div class="stats"><p>#CD{{ turret.coolingDelay }}</span></p></div>
                 {% if turret.stats|length > 0 %}
-                    <div class="divider" style="border-color: {{ colours['border-interior']}}"></div>
+                    <div class="divider" style="border-color: {{ colours['C']}}"></div>
                 {% endif %}
                 {% for stat in turret.stats %}
                     <div class="otherstats"><p>{{ stat }}</p></div>
                 {% endfor %}
                 {% if turret.mechanics|length > 0 %}
-                    <div class="divider" style="border-color: {{ colours['border-interior']}}"></div>
+                    <div class="divider" style="border-color: {{ colours['C']}}"></div>
                 {% endif %}
                 {% for mechanic in turret.mechanics %}
                     <div class="otherstats"><p>{% if loop.index > 1 %}<br/>{% endif %}- {{ mechanic }}</p></div>
                 {% endfor %}
-                <div class="divider" style="border-color: {{ colours['border-interior']}}; border-color: {{ colours['border-interior']}}"></div>
+                <div class="divider" style="border-color: {{ colours['C']}}"></div>
                 {% for weapon in turret.weapons %}
                     <div class="slots weapons">
                         {% for i in range(weapon[0]) %}
@@ -75,8 +78,8 @@
                         {% endfor %}
                     </div>
                 {% endfor %}
-                <div class="divider" style="border-color: {{ colours['border-interior']}}; border-color: {{ colours['border-interior']}}"></div>
-                <div class="otherstats"><p>{{ turret.unlock }}</span></p></div>
+                <div class="divider" style="border-color: {{ colours['C']}}"></div>
+                <div class="otherstats" style="text-align: center"><p>{{ turret.unlock }}</span></p></div>
             </div>
         {% endwith %}
     {% endwith %}

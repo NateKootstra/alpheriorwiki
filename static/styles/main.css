@@ -1,199 +1,93 @@
-@keyframes turret {
-    from {
-        transform: rotate(0deg);
-    }
+h1.title {
+    width: 100%;
 
-    to {
-        transform: rotate(360deg);
-    }
+    border-bottom: 0.5vh white solid;
+
+    font-size: 8vh;
+    text-align: center;
+}
+
+.pages {
+    display: flex;
+    justify-content: space-between;
+}
+
+.pages a {
+    display: inline-block;
+    width: fit-content;
+    height: fit-content;
 }
 
 :root {
-    --screen-width: 0.2;
-}
-
-@media (min-width: 768px) and (max-width: 1024px) and (orientation: landscape) {}
-
-@media (min-width: 320px) and (max-width: 767px) and (orientation: landscape) {}
-
-@media (min-width: 768px) and (max-width: 1024px) and (orientation: portrait) {
-    :root {
-        --screen-width: 0.85;
-    }
-
-    .overview {
-        display: block;
-        margin-left: auto;
-        margin-right: auto;
-    }
+    --screen-width: 0.15;
 }
 
 @media (max-width: 767px) and (orientation: portrait) {
     :root {
-        --screen-width: 0.85;
+        --screen-width: 0.7;
     }
 
-    .overview {
+    h1.title {
+        border-width: 0.25vh;
+        font-size: 4vh;
+    }
+
+    .pages {
         display: block;
-        margin-left: auto;
-        margin-right: auto;
+        text-align: center;
+    }
+
+    .pages a {
+        display: block;
+        margin: auto;
     }
 }
 
-.overview {
-    width: calc(100% * var(--screen-width));
+.pages a {
+    margin-top: calc(10vw * var(--screen-width));
+}
+
+.pages .page {
+    width: fit-content;
     height: fit-content;
 
-    padding: calc(5vw * var(--screen-width));
-
-    border-radius: calc(10vw * var(--screen-width));
-    border: calc(2.5vw * var(--screen-width)) solid;
+    border: calc(2vw * var(--screen-width)) solid;
+    border-radius: calc(20vw * var(--screen-width));
 }
 
-.overview h1 {
-    width: 100%;
+.pages .page div {
+    display: grid;
+    justify-content: center;
+    align-items: center;
 
-    font-size: calc(15vw * var(--screen-width));
+    width: calc(90vw * var(--screen-width));
+    height: calc(90vw * var(--screen-width));
 
-    font-size: calc(15vw * var(--screen-width));
-    font-weight: bold;
-    text-align: center;
+    padding: calc(10vw * var(--screen-width));
 }
 
-.overview h2 {
-    width: 100%;
-
-    margin-top: calc(5vw * var(--screen-width));
-
-    font-size: calc(7vw * var(--screen-width));
-    font-weight: normal;
-    font-style: italic;
-    text-align: center;
-}
-
-.overview .divider {
-    width: 92%;
-
-    margin-top: calc(5vw * var(--screen-width));
-    margin-bottom: calc(5vw * var(--screen-width));
-
-    margin-left: auto;
-    margin-right: auto;
-
-    border: calc(1.25vw * var(--screen-width)) solid;
-    border-radius: calc(15vw * var(--screen-width));
-}
-
-.overview .turret {
-    display: block;
-
-    width: 80%;
-    aspect-ratio: 1/1;
-
-    margin-left: auto;
-    margin-right: auto;
-    padding: calc(5vw * var(--screen-width));
-
-    border: calc(2.5vw * var(--screen-width)) solid;
-    border-radius: calc(15vw * var(--screen-width));
-}
-
-.overview .turret .hamburger {
-    position: absolute;
-
-    border: none;
-    background: none;
-}
-
-.overview .turret .hamburger img {
-    width: calc(15vw * var(--screen-width));
-}
-
-.overview .turret .turretlist {
-    position: absolute;
-}
-
-.overview .turret .turretlist img {
-    width: calc(11vw * var(--screen-width));
-    margin: calc(0.1vw * var(--screen-width));
-}
-
-.overview .turret .turreticon {
-    border: none;
-    background: none;
+.pages .page div img {
+    grid-row-start: 1;
+    grid-column-start: 1;
 
     width: 100%;
     height: 100%;
+
+    object-fit: scale-down;
 }
 
-.overview .turret .turreticon img {
-    visibility: visible;
+.pages h1 {
+    width: 100%;
 
-    width: 80%;
+    padding-top: calc(4vw * var(--screen-width));
+    padding-bottom: calc(5vw * var(--screen-width));
 
-    animation: turret 60s linear infinite;
-}
+    border-top: calc(2vw * var(--screen-width)) solid;
 
-.overview .stats {
-    margin-left: auto;
-    margin-right: auto;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    width: 93%;
-}
-
-.overview .stats p {
     font-size: calc(15vw * var(--screen-width));
+    text-align: center;
 }
 
-.overview .stats span {
-    font-size: calc(15vw * var(--screen-width));
-}
-
-.overview .stats .symbol {
-    height: calc(10.75vw * var(--screen-width));
-    margin-right: calc(1.5vw * var(--screen-width));
-}
-
-.overview .slots {
-    margin-left: calc(3.5vw * var(--screen-width));
-}
-
-.overview .slots img {
-    width: calc(13.8vw * var(--screen-width));
-}
-
-.overview .weapons {
-    margin-bottom: calc(1.5vw * var(--screen-width));
-}
-
-.overview .otherstats {
-    margin-left: calc(3.5vw * var(--screen-width));
-}
-
-.overview .otherstats p {
-    font-size: calc(8vw * var(--screen-width));
-    white-space-collapse: preserve;
-}
-
-.overview .otherstats span {
-    font-size: calc(8vw * var(--screen-width));
-}
-
-.overview .otherstats .symbol {
-    height: calc(6.1vw * var(--screen-width));
-    margin-right: calc(1.5vw * var(--screen-width));
-}
-
-.overview .otherstats .acgt {
-    height: calc(6.1vw * var(--screen-width));
-}
-
-.content {
-    display: flex;
-    align-content: center;
-    justify-content: left;
-
-    padding: 1vw;
+a.WIP {
+    filter: grayscale(100%);
 }
