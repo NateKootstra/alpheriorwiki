@@ -1,16 +1,13 @@
-{% extends 'base.html' %}
+{% extends 'gg.html' %}
 
 {% block title %}{% with item, category, game = get_page_info() %}<title>GG Wiki: {{ item.name }}</title>{% endwith %}{% endblock %}
 
-{% block links %}
+{% block links1 %}
     <link rel="stylesheet" href="{{ url_for('static', filename='styles/wikipages.css')}}">
     <script src="{{ url_for('static', filename='js/wikipages.js')}}"></script>
 {% endblock %}
 
-{% block subtitle %}
-{% endblock %}
-
-{% block content %}
+{% block page %}
     {% with colours = get_colours() %}
         {% with item, category, game = get_page_info() %}
             {% block main %}{% endblock %}

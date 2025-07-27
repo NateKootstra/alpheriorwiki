@@ -179,21 +179,24 @@ def get_section():
 app.jinja_env.globals.update(get_section=get_section)
 
 def get_page_info():
-    if request.path.split("/")[2] == "turrets":
-        for i,turret in enumerate(turrets):
-            if turret.name == request.path.split("/")[-1]:
-                if turret.name == "Jester":
-                    turret.flavor = jester.getFlavor()
-                    turret.hp = random.randint(20, 60)
-                    turret.maxHeat = random.randint(50, 200)
-                    turret.coolingRate = random.randint(50, 200)
-                    turret.coolingDelay = round(random.randint(50, 200) * 0.01, 2)
-                return turret, 'turrets', 'gg'
-    elif request.path.split("/")[2] == "perks":
-        for i,perk in enumerate(perks):
-            if perk.name == request.path.split("/")[-1]:
-                return perk, 'perks', 'gg'
-    return 404
+    try:
+        if request.path.split("/")[2] == "turrets":
+            for i,turret in enumerate(turrets):
+                if turret.name == request.path.split("/")[-1]:
+                    if turret.name == "Jester":
+                        turret.flavor = jester.getFlavor()
+                        turret.hp = random.randint(20, 60)
+                        turret.maxHeat = random.randint(50, 200)
+                        turret.coolingRate = random.randint(50, 200)
+                        turret.coolingDelay = round(random.randint(50, 200) * 0.01, 2)
+                    return turret, 'turrets', 'gg'
+        elif request.path.split("/")[2] == "perks":
+            for i,perk in enumerate(perks):
+                if perk.name == request.path.split("/")[-1]:
+                    return perk, 'perks', 'gg'
+    except:
+        pass
+    return None, '', ''
 app.jinja_env.globals.update(get_page_info=get_page_info)
 
 def get_template(path):

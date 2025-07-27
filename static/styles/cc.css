@@ -16,6 +16,10 @@ h1.title {
     font-size: 8vh;
 }
 
+.pages h1 {
+    padding-bottom: calc(2vw * var(--screen-width));
+}
+
 @media (max-width: 767px) and (orientation: portrait) {
     h1.title {
         margin-top: 0.9vh;

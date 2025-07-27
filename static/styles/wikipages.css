@@ -1,16 +1,12 @@
-:root {
-    --screen-width: 0.2;
-}
-
 @media (max-width: 767px) and (orientation: portrait) {
-    :root {
-        --screen-width: 0.85;
-    }
-
     .overview {
         display: block;
         margin-left: auto;
         margin-right: auto;
+    }
+
+    .page {
+        display: none;
     }
 }
 
@@ -18,10 +14,12 @@
     width: calc(100% * var(--screen-width));
     height: fit-content;
 
+    margin-top: calc(10vw * var(--screen-width));
+
     padding: calc(5vw * var(--screen-width));
 
     border-radius: calc(10vw * var(--screen-width));
-    border: calc(2.5vw * var(--screen-width)) solid;
+    border: calc(2vw * var(--screen-width)) solid;
 }
 
 .overview h1 {
@@ -68,7 +66,7 @@
     margin-right: auto;
     padding: calc(5vw * var(--screen-width));
 
-    border: calc(2.5vw * var(--screen-width)) solid;
+    border: calc(2vw * var(--screen-width)) solid;
     border-radius: calc(15vw * var(--screen-width));
 }
 
@@ -78,13 +76,6 @@
 
     width: 100%;
     height: 100%;
-}
-
-.overview .item .itemicon img {
-
-    width: 80%;
-
-    animation: item 60s linear infinite;
 }
 
 .overview .stats {
@@ -141,12 +132,4 @@
 
 .overview .otherstats .acgt {
     height: calc(6.1vw * var(--screen-width));
-}
-
-.content {
-    display: flex;
-    align-content: center;
-    justify-content: left;
-
-    padding: 1vw;
 }

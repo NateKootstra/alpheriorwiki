@@ -20,6 +20,10 @@ h1.title {
     justify-content: center;
 }
 
+.pages h1 {
+    padding-bottom: calc(5vw * var(--screen-width));
+}
+
 @media (max-width: 767px) and (orientation: portrait) {
     h1.title {
         padding-bottom: 0.25vh;

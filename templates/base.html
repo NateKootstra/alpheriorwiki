@@ -26,7 +26,12 @@
 
 {% with colours = get_colours() %}
   <body id="mainpage" style="visibility: hidden; background-color: {{ colours['background'] }}">
-
+    <div class="loading" style="animation: loading 1.8s linear forwards;">
+      <div style="background-color: {{ colours['A'] }}; animation: loading1 1.8s ease infinite;"></div>
+      <div style="background-color: {{ colours['C'] }}; animation: loading2 1.8s ease infinite;"></div>
+      <div style="background-color: {{ colours['G'] }}; animation: loading3 1.8s ease infinite;"></div>
+      <div style="background-color: {{ colours['T'] }}; animation: loading4 1.8s ease infinite;"></div>
+    </div>
     <nav>
       {% with section = get_section() %}
         {% if section == "ggt" %}
