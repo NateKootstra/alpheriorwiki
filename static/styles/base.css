@@ -146,6 +146,11 @@
     --loading-width: 0.4;
 }
 
+html,
+body {
+    overflow: hidden;
+}
+
 * {
     margin: 0;
     font-size: 0;
@@ -198,7 +203,7 @@ nav {
 
 .loading {
     width: 100vw;
-    height: 100vh;
+    height: 100dvh;
 
     display: flex;
     justify-content: center;
