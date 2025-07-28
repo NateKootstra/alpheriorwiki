@@ -4,8 +4,245 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0 user-scalable=no">
 
-<link rel="stylesheet" href="{{ url_for('static', filename='styles/base.css')}}">
-<script src="{{ url_for('static', filename='js/base.js')}}"></script>
+<script>
+  window.onload = function () {
+      Promise.all(Array.from(document.images).filter(img => !img.complete).map(img => new Promise(resolve => { img.onload = img.onerror = resolve; }))).then(() => {
+          document.getElementById("mainpage").style.visibility = "visible";
+          document.getElementsByClassName("loading")[0].remove();
+
+          document.getElementsByTagName("html")[0].style.overflow = "visible";
+          document.getElementsByTagName("body")[0].style.overflow = "visible";
+      })
+  }
+</script>
+<style>
+  @font-face {
+      font-family: 'Fredoka';
+      src: url("../fonts/Fredoka-Regular.ttf") format("truetype");
+      font-weight: normal;
+      font-style: normal;
+      font-display: swap;
+  }
+
+  @font-face {
+      font-family: 'Fredoka';
+      src: url("../fonts/Fredoka-Medium.ttf") format("truetype");
+      font-weight: bold;
+      font-style: normal;
+      font-display: swap;
+  }
+
+  @font-face {
+      font-family: 'Blogger Sans';
+      src: url("../fonts/Blogger-Sans-Regular.ttf") format("truetype");
+      font-weight: normal;
+      font-style: normal;
+      font-display: swap;
+  }
+
+  @font-face {
+      font-family: 'Blogger Sans';
+      src: url("../fonts/Blogger-Sans-Medium.ttf") format("truetype");
+      font-weight: bold;
+      font-style: normal;
+      font-display: swap;
+  }
+
+  @keyframes turret {
+      from {
+          transform: rotate(0deg);
+      }
+
+      to {
+          transform: rotate(360deg);
+      }
+  }
+
+  @keyframes perk {
+      0% {
+          filter: drop-shadow(0 0 0 #ff40ff) drop-shadow(0 0 0 #a0ff40);
+      }
+
+      25% {
+          filter: drop-shadow(calc(-3vw * var(--screen-width)) 0 0 #ff40ff) drop-shadow(0 0 0 #a0ff40);
+      }
+
+      50% {
+          filter: drop-shadow(0 0 0 #ff40ff) drop-shadow(0 0 0 #a0ff40);
+      }
+
+      75% {
+          filter: drop-shadow(0 0 0 #ff40ff) drop-shadow(calc(3vw * var(--screen-width)) 0 0 #a0ff40);
+      }
+
+      100% {
+          filter: drop-shadow(0 0 0 #ff40ff) drop-shadow(0 0 0 #a0ff40);
+      }
+  }
+
+  @keyframes weapon {
+      0% {
+          filter: blur(0);
+      }
+
+      50% {
+          filter: blur(calc(10vw * var(--screen-width)));
+      }
+
+      100% {
+          filter: blur(0)
+      }
+  }
+
+  @keyframes loading {
+      99% {
+          visibility: hidden;
+      }
+
+      100% {
+          visibility: visible;
+      }
+  }
+
+  @keyframes loading1 {
+      0% {
+          transform: translateY(0);
+      }
+
+      15% {
+          transform: translateY(calc(-10vw * var(--loading-width)));
+      }
+
+      30% {
+          transform: translateY(0);
+      }
+  }
+
+  @keyframes loading2 {
+      20% {
+          transform: translateY(0);
+      }
+
+      35% {
+          transform: translateY(calc(-10vw * var(--loading-width)));
+      }
+
+      50% {
+          transform: translateY(0);
+      }
+  }
+
+  @keyframes loading3 {
+      40% {
+          transform: translateY(0);
+      }
+
+      55% {
+          transform: translateY(calc(-10vw * var(--loading-width)));
+      }
+
+      70% {
+          transform: translateY(0);
+      }
+  }
+
+  @keyframes loading4 {
+      60% {
+          transform: translateY(0);
+      }
+
+      75% {
+          transform: translateY(calc(-10vw * var(--loading-width)));
+      }
+
+      100% {
+          transform: translateY(0);
+      }
+  }
+
+  :root {
+      --loading-width: 0.4;
+  }
+
+  html,
+  body {
+      overflow: hidden;
+  }
+
+  * {
+      margin: 0;
+      font-size: 0;
+      font-weight: normal;
+      font-style: normal;
+      color: white;
+      text-decoration: none;
+  }
+
+  h1.title {
+      width: 100%;
+
+      border-bottom: 0.5vh white solid;
+
+      font-size: 7.1vh;
+      text-align: center;
+  }
+
+  nav {
+      display: flex;
+      height: fit-content;
+  }
+
+  .GG,
+  .CC {
+      width: 50%;
+  }
+
+  .GG div,
+  .CC div {
+      width: 100%;
+      height: fit-content;
+      height: 10vh;
+
+      display: flex;
+      justify-content: center;
+
+      border: 0.5vh solid;
+      box-sizing: border-box;
+  }
+
+  .GG img,
+  .CC img {
+      object-fit: scale-down;
+
+      width: 100%;
+      height: auto;
+      padding: 1vh;
+  }
+
+  .loading {
+      width: 100vw;
+      height: 100dvh;
+
+      display: flex;
+      justify-content: center;
+      align-items: center;
+  }
+
+  .loading div {
+      width: calc(17vw * var(--loading-width));
+      height: calc(17vw * var(--loading-width));
+      border-radius: 100%;
+
+      margin-left: calc(3.2vw * var(--loading-width));
+      margin-right: calc(3.2vw * var(--loading-width));
+  }
+
+  @media (max-width: 767px) and (orientation: portrait) {
+      :root {
+          --loading-width: 1;
+      }
+  }
+</style>
 
 {% block links %}{% endblock %}
 
