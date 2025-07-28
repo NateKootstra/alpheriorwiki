@@ -1,8 +1,8 @@
 <!doctype html>
-
+<html lang="en">
 {% block title%}{% endblock %}
 
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0 user-scalable=no">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <link rel="stylesheet" href="{{ url_for('static', filename='styles/base.css')}}">
 <script src="{{ url_for('static', filename='js/base.js')}}"></script>
@@ -33,20 +33,20 @@
     <nav>
       {% with section = get_section() %}
         {% if section == "ggt" %}
-          <a class="GG" href="/"><div style="border-color: {{ colours['A'] }};"><img src="{{ url_for('static', filename='images/gg/Logo.png' )}}"/></div></a>
-          <a class="CC" href="/cc"><div style="border-color: {{ colours['G'] }};"><img src="{{ url_for('static', filename='images/cc/Logo.png' )}}"/></div></a>
+          <a class="GG" aria-label="Home page." href="/"><div style="border-color: {{ colours['A'] }};"><img src="{{ url_for('static', filename='images/gg/Logo.png' )}}"/></div></a>
+          <a class="CC" aria-label="Cell Command page." href="/cc"><div style="border-color: {{ colours['G'] }};"><img src="{{ url_for('static', filename='images/cc/Logo.png' )}}"/></div></a>
         {% elif section == "gg" %}
-          <a class="GG" href="/gg"><div style="border-color: {{ colours['A'] }};"><img src="{{ url_for('static', filename='images/gg/Logo.png' )}}"/></div></a>
-          <a class="CC" href="/cc"><div style="border-color: {{ colours['G'] }};"><img src="{{ url_for('static', filename='images/cc/Logo.png' )}}"/></div></a>
+          <a class="GG" aria-label="Genome Guardian page."href="/gg"><div style="border-color: {{ colours['A'] }};"><img src="{{ url_for('static', filename='images/gg/Logo.png' )}}"/></div></a>
+          <a class="CC" aria-label="Cell Command page." href="/cc"><div style="border-color: {{ colours['G'] }};"><img src="{{ url_for('static', filename='images/cc/Logo.png' )}}"/></div></a>
         {% elif section == "cct" %}
-          <a class="GG" href="/gg"><div style="border-color: {{ colours['A'] }};"><img src="{{ url_for('static', filename='images/gg/Logo.png' )}}"/></div></a>
-          <a class="CC" href="/"><div style="border-color: {{ colours['G'] }};"><img src="{{ url_for('static', filename='images/cc/Logo.png' )}}"/></div></a>
+          <a class="GG" aria-label="Genome Guardian page."href="/gg"><div style="border-color: {{ colours['A'] }};"><img src="{{ url_for('static', filename='images/gg/Logo.png' )}}"/></div></a>
+          <a class="CC" aria-label="Return to home page." href="/"><div style="border-color: {{ colours['G'] }};"><img src="{{ url_for('static', filename='images/cc/Logo.png' )}}"/></div></a>
         {% elif section == "cc" %}
-          <a class="GG" href="/gg"><div style="border-color: {{ colours['A'] }};"><img src="{{ url_for('static', filename='images/gg/Logo.png' )}}"/></div></a>
-          <a class="CC" href="/cc"><div style="border-color: {{ colours['G'] }};"><img src="{{ url_for('static', filename='images/cc/Logo.png' )}}"/></div></a>
+          <a class="GG" aria-label="Genome Guardian page." href="/gg"><div style="border-color: {{ colours['A'] }};"><img src="{{ url_for('static', filename='images/gg/Logo.png' )}}"/></div></a>
+          <a class="CC" aria-label="Cell Command page." href="/cc"><div style="border-color: {{ colours['G'] }};"><img src="{{ url_for('static', filename='images/cc/Logo.png' )}}"/></div></a>
         {% elif section %}
-          <a class="GG" href="/gg"><div style="border-color: {{ colours['A'] }};"><img src="{{ url_for('static', filename='images/gg/Logo.png' )}}"/></div></a>
-          <a class="CC" href="/cc"><div style="border-color: {{ colours['G'] }};"><img src="{{ url_for('static', filename='images/cc/Logo.png' )}}"/></div></a>
+          <a class="GG" aria-label="Genome Guardian page."href="/gg"><div style="border-color: {{ colours['A'] }};"><img src="{{ url_for('static', filename='images/gg/Logo.png' )}}"/></div></a>
+          <a class="CC" aria-label="Cell Command page." href="/cc"><div style="border-color: {{ colours['G'] }};"><img src="{{ url_for('static', filename='images/cc/Logo.png' )}}"/></div></a>
         {% endif %}
       {% endwith %}
     </nav>
@@ -56,3 +56,4 @@
     </div>
   </body>
 {% endwith %}
+</html>
