@@ -57,7 +57,7 @@
         {% if ns.counter % 10 == 0 %}
             <br/>
         {% endif %}
-        <a href="{{ gridperk.name }}"><img src="{{ url_for('static', filename='images/gg/perks/' + gridperk.name + '.png' )}}"/></a>
+        <a href="{{ gridperk.name }}"><img src="{{ url_for('static', filename='images/gg/perks/32x32/' + gridperk.name + '.png' )}}"/></a>
         {% set ns.counter = ns.counter + 1 %}
     {% endfor %}
 {% endblock %}

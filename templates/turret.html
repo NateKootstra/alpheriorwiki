@@ -40,7 +40,7 @@
     </style>
 
     {% for gridturret in get_turrets() %}
-        <a href="{{ gridturret.name }}"><img src="{{ url_for('static', filename='images/gg/turrets/' + gridturret.name + '.png' )}}"/></a>
+        <a href="{{ gridturret.name }}"><img src="{{ url_for('static', filename='images/gg/turrets/32x32/' + gridturret.name + '.png' )}}"/></a>
         {% if loop.index % 7 == 0 %}
             <br/>
         {% endif %}
