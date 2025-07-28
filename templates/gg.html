@@ -3,6 +3,16 @@
 {% block title %}<title>Genome Guardian Wiki</title>{% endblock %}
 
 {% block links %}
+    {% with item, category, game = get_page_info() %}
+        {% if category == "turrets" %}
+            <meta name="description" content="Information for the {{ item.name }} turret in Genome Guardian.">
+        {% elif category == "perks" %}
+            <meta name="description" content="Information for the {{ item.name }} perk in Genome Guardian.">
+        {% else %}
+            <meta name="description" content="Home page for the Genome Guardian wiki.">
+        {% endif %}
+    {% endwith %}
+
     <link rel="stylesheet" href="{{ url_for('static', filename='styles/main.css')}}">
     {% block links1 %}{% endblock %}
 {% endblock %}
