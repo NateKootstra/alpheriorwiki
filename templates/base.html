@@ -11,17 +11,15 @@
 
 {% with section = get_section() %}
   {% if section == "gg" or section == "ggt" %}
-    <link rel="icon" type="image/png" sizes="32x32" href="/favicons/gg-32x32">
-    <link rel="icon" type="image/png" sizes="16x16" href="/favicons/gg-16x16">
     <link rel="stylesheet" href="{{ url_for('static', filename='styles/gg.css')}}">
   {% elif section == "cc" or section == "cct" %}
-    <link rel="icon" type="image/png" sizes="32x32" href="/favicons/cc-32x32">
-    <link rel="icon" type="image/png" sizes="16x16" href="/favicons/cc-16x16">
     <link rel="stylesheet" href="{{ url_for('static', filename='styles/cc.css')}}">
-  {% else %}
-    <link rel="icon" type="image/png" sizes="32x32" href="/favicons/base-32x32">
-    <link rel="icon" type="image/png" sizes="16x16" href="/favicons/base-16x16">
   {% endif %}
+{% endwith %}
+
+{% with large, small = get_favicon() %}
+  <link rel="icon" type="image/png" sizes="32x32" href="{{ url_for('static', filename=large)}}">
+  <link rel="icon" type="image/png" sizes="16x16" href="{{ url_for('static', filename=small)}}">
 {% endwith %}
 
 {% with colours = get_colours() %}

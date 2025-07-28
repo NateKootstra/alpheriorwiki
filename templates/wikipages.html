@@ -11,12 +11,12 @@
     {% with colours = get_colours() %}
         {% with item, category, game = get_page_info() %}
             {% block main %}{% endblock %}
-                <button class="hamburger" onclick="showGrid()"><img src="{{ url_for('static', filename='images/swap.png' )}}"/></button>
+                <button aria-labelledby="gridbutton" class="hamburger" onclick="showGrid()"><img src="{{ url_for('static', filename='images/swap.png' )}}"/></button>
                 <div class="itemlist" style="display: none;">
                     {% block grid %}
                     {% endblock %}
                 </div>
-                    <button class="itemicon" onclick="showGrid()"><img src="{{ url_for('static', filename='images/' + game + '/' + category + '/' + item.name + '.png')}}"/></button>
+                    <button aria-labelledby="gridbutton" class="itemicon" onclick="showGrid()"><img alt="Select {{ category }}" id="gridbutton" aria-label="Select {{ category }}" src="{{ url_for('static', filename='images/' + game + '/' + category + '/' + item.name + '.png')}}"/></button>
                 </div>
                 {% if not item.flavor == "" %}
                     <h2>"{{ item.flavor }}"</h2>

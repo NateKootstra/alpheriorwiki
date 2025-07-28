@@ -199,6 +199,21 @@ def get_page_info():
     return None, '', ''
 app.jinja_env.globals.update(get_page_info=get_page_info)
 
+def get_favicon():
+    if request.path.split("/")[1] == "gg":
+        try:
+            if request.path.split("/")[2] == "turrets":
+                return "images/gg/turrets/32x32/" + request.path.split("/")[3] + ".png", "images/gg/turrets/16x16/" + request.path.split("/")[3] + ".png"
+            elif request.path.split("/")[2] == "perks":
+                return "images/gg/perks/32x32/" + request.path.split("/")[3] + ".png", "images/gg/perks/16x16/" + request.path.split("/")[3] + ".png"
+        except:
+            pass
+        return "images/favicons/gg-32x32.png", "images/favicons/gg-32x32.png"
+    elif request.path.split("/")[1] == "cc":
+        return "images/favicons/cc-32x32.png", "images/favicons/cc-32x32.png"
+    return "images/favicons/base-32x32.png", "images/favicons/base-32x32.png"
+app.jinja_env.globals.update(get_favicon=get_favicon)
+
 def get_template(path):
     global replace
     global replacei
@@ -248,11 +263,6 @@ def perk(perkName):
             return get_template('perk.html')
     return "Perk Not Found"
 
-
-# Privately facing pages.
-@app.route("/favicons/<favicon>")
-def favicon(favicon):
-    return send_file("static/images/favicons/" + favicon + ".png", "image/png")
 
 # Start the application.
 if __name__ == "__main__":
