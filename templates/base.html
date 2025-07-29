@@ -3,6 +3,10 @@
 {% block title%}{% endblock %}
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0 user-scalable=no">
+<link rel="preload" as="font" href="{{ url_for('../fonts/Fredoka-Regular.ttf') }}" type="font/tff" crossorigin="anonymous">
+<link rel="preload" as="font" href="{{ url_for('../fonts/Fredoka-Medium.ttf') }}" type="font/tff" crossorigin="anonymous">
+<link rel="preload" as="font" href="{{ url_for('../fonts/Blogger-Sans-Regular.ttf') }}" type="font/tff" crossorigin="anonymous">
+<link rel="preload" as="font" href="{{ url_for('../fonts/Blogger-Sans-Medium.ttf') }}" type="font/tff" crossorigin="anonymous">
 
 <script>
   window.onload = function () {
@@ -255,8 +259,8 @@
 {% endwith %}
 
 {% with large, small = get_favicon() %}
-  <link rel="icon" type="image/png" sizes="32x32" href="{{ url_for('static', filename=large)}}">
-  <link rel="icon" type="image/png" sizes="16x16" href="{{ url_for('static', filename=small)}}">
+  <link rel="icon" type="image/png" sizes="64x64" href="{{ url_for('static', filename=large)}}">
+  <link rel="icon" type="image/png" sizes="32x32" href="{{ url_for('static', filename=small)}}">
 {% endwith %}
 
 {% with colours = get_colours() %}

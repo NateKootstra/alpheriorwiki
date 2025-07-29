@@ -203,15 +203,15 @@ def get_favicon():
     if request.path.split("/")[1] == "gg":
         try:
             if request.path.split("/")[2] == "turrets":
-                return "images/gg/turrets/32x32/" + request.path.split("/")[3] + ".png", "images/gg/turrets/16x16/" + request.path.split("/")[3] + ".png"
+                return "images/gg/turrets/64x64/" + request.path.split("/")[3] + ".png", "images/gg/turrets/32x32/" + request.path.split("/")[3] + ".png"
             elif request.path.split("/")[2] == "perks":
-                return "images/gg/perks/32x32/" + request.path.split("/")[3] + ".png", "images/gg/perks/16x16/" + request.path.split("/")[3] + ".png"
+                return "images/gg/perks/64x64/" + request.path.split("/")[3] + ".png", "images/gg/perks/32x32/" + request.path.split("/")[3] + ".png"
         except:
             pass
-        return "images/favicons/gg-32x32.png", "images/favicons/gg-32x32.png"
+        return "images/favicons/gg-64x64.png", "images/favicons/gg-32x32.png"
     elif request.path.split("/")[1] == "cc":
-        return "images/favicons/cc-32x32.png", "images/favicons/cc-32x32.png"
-    return "images/favicons/base-32x32.png", "images/favicons/base-32x32.png"
+        return "images/favicons/cc-64x64.png", "images/favicons/cc-32x32.png"
+    return "images/favicons/base-64x64.png", "images/favicons/base-32x32.png"
 app.jinja_env.globals.update(get_favicon=get_favicon)
 
 def get_template(path):
@@ -263,6 +263,13 @@ def perk(perkName):
             return get_template('perk.html')
     return "Perk Not Found"
 
+@app.route("/robots.txt")
+def robots():
+    return send_file('robots.txt', 'text/plain')
+
+@app.route("/sitemap.txt")
+def sitemap():
+    return send_file('sitemap.txt', 'text/plain')
 
 # Start the application.
 if __name__ == "__main__":
