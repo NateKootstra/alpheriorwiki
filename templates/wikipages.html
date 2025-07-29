@@ -1,6 +1,6 @@
 {% extends 'gg.html' %}
 
-{% block title %}{% with item, category, game = get_page_info() %}<title>GG Wiki: {{ item.name }}</title>{% endwith %}{% endblock %}
+{% block title %}{% with item, category, game = get_page_info() %}<title>{{ item.name }} | The Genome Guardian Wiki</title>{% endwith %}{% endblock %}
 
 {% block links1 %}
     <link rel="stylesheet" href="{{ url_for('static', filename='styles/wikipages.css')}}">
