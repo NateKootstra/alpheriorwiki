@@ -18,6 +18,10 @@
           document.getElementsByTagName("body")[0].style.overflow = "visible";
       })
   }
+
+  function understood() {
+    document.getElementsByClassName("disclaimer")[0].style.display = "none";
+  }
 </script>
 <style>
   @font-face {
@@ -180,15 +184,8 @@
       font-style: normal;
       color: white;
       text-decoration: none;
-  }
 
-  h1.title {
-      width: 100%;
-
-      border-bottom: 0.5vh white solid;
-
-      font-size: 7.1vh;
-      text-align: center;
+      font-family: "Courier New", "Lucida Console", monospace;
   }
 
   nav {
@@ -210,7 +207,7 @@
       display: flex;
       justify-content: center;
 
-      border: 0.5vh solid;
+      border: 0.65vh solid;
       box-sizing: border-box;
   }
 
@@ -239,6 +236,49 @@
 
       margin-left: calc(3.2vw * var(--loading-width));
       margin-right: calc(3.2vw * var(--loading-width));
+  }
+
+  .disclaimer {
+    width: 100%;
+    height: fit-content;
+
+    margin-top: 1vh;
+
+    text-align: center;
+
+    border: 0.65vh solid;
+    box-sizing: border-box;
+  }
+
+  .disclaimer p, .disclaimer a, .disclaimer b, .disclaimer button {
+    font-family: "Courier New", "Lucida Console", monospace;
+    font-size: 3vh;
+    font-weight: 500;
+  }
+
+  .disclaimer a, .disclaimer b {
+    font-weight: 900;
+  }
+
+  .disclaimer p {
+    text-align: center;
+    margin: 1vh;
+  }
+
+  .disclaimer button {
+    font-size: 4vh;
+
+    margin-top: 2vh;
+    margin-bottom: 3vh;
+    margin-left: auto;
+    margin-right: auto;
+
+    padding-top: 0.8vh;
+    padding-left: 0.8vh;
+    padding-right: 0.8vh;
+
+    background-color: black;
+    border: 0.65vh solid;
   }
 
   @media (max-width: 767px) and (orientation: portrait) {
@@ -291,7 +331,10 @@
         {% endif %}
       {% endwith %}
     </nav>
-
+    <div class="disclaimer" style="border-color: {{ colours['Abyss'] }};">
+        <p><b style="font-size: 4vh">DISCLAIMER:</b><br/>Despite being recognized as the official fan wiki, this website <b>WAS NOT</b> created by, <b>IS NOT</b> maintained by, and <b>IS NOT</b> the property of Alpherior (the developer behind the games documented). Any and all inquiries should be directed towards the wiki maintainer (<b>natekootstra@gmail.com</b>). If you would like to contribute, please see the <a href="https://github.com/natekootstra/alpheriorwiki" style="color: {{ colours['C'] }};">Github</a> repository for further information.</p>
+        <button onclick="understood()" style="border-color: {{ colours['C'] }};">I understand</button>
+    </div>
     <div class="content">
       {% block content %}{% endblock %}
     </div>

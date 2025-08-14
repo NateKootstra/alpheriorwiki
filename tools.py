@@ -14,13 +14,6 @@ def scale(folder, size):
             img = cv2.imread('static/images/gg/' + folder + '/' + turret, cv2.IMREAD_UNCHANGED)
             small = cv2.resize(img, dsize=(size, size), interpolation=cv2.INTER_AREA)
             cv2.imwrite('static/images/gg/' + folder + '/' + str(size) + 'x' + str(size) + '/' + turret, small)
-        
-# scale('perks', 16)
-# scale('perks', 32)
-# scale('perks', 64)
-# scale('turrets', 16)
-# scale('turrets', 32)
-# scale('turrets', 64)
 
 class Sitemap():
     url = "https://alpherior.wiki"
@@ -42,6 +35,15 @@ def update_sitemap():
     for perk in perks:
         sitemap.add("/gg/perks/" + perk.name)
 
-    file = open("sitemap.txt", "w")
+    file = open("botinfo/sitemap.txt", "w")
     file.writelines(sitemap.text)
     file.close()
+    
+# scale('perks', 16)
+# scale('perks', 32)
+# scale('perks', 64)
+# scale('turrets', 16)
+# scale('turrets', 32)
+# scale('turrets', 64)
+
+update_sitemap()

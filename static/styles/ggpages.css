@@ -15,6 +15,7 @@
     height: fit-content;
 
     margin-top: calc(10vw * var(--screen-width));
+    margin-bottom: calc(10vw * var(--screen-width));
 
     padding: calc(5vw * var(--screen-width));
 

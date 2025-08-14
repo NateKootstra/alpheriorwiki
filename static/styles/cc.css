@@ -12,8 +12,6 @@
 
 h1.title {
     margin-top: 1.45vh;
-
-    font-size: 8vh;
 }
 
 .pages h1 {
@@ -23,6 +21,5 @@ h1.title {
 @media (max-width: 767px) and (orientation: portrait) {
     h1.title {
         margin-top: 0.9vh;
-        font-size: 4vh;
     }
 }

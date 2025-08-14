@@ -1,7 +1,7 @@
 h1.title {
     width: 100%;
 
-    border-bottom: 0.5vh white solid;
+    border-bottom: 0.65vh white solid;
 
     font-size: 8vh;
     text-align: center;
@@ -28,7 +28,7 @@ h1.title {
     }
 
     h1.title {
-        border-width: 0.25vh;
+        margin-top: calc(6vw * var(--screen-width));
         font-size: 4vh;
     }
 

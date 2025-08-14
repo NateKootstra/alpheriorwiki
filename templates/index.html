@@ -1,15 +1,15 @@
 {% extends 'base.html' %}
 
-{% block title %}<title>Alpherior Games Wiki</title>{% endblock %}
+{% block title %}<title>The Alpherior Games Wiki</title>{% endblock %}
 
 {% block links %}
-    <meta name="description" content="Home page for the Alpherior Wiki.">
+    <meta name="description" content="Home page for the Alpherior Games Wiki, which includes Genome Guardian and Cell Command.">
 
     <link rel="stylesheet" href="{{ url_for('static', filename='styles/main.css')}}">
 {% endblock %}
 
 {% block content %}
-    <h1 class="title">Alpherior Wiki</h1>
+    <h1 class="title" style="margin-top: calc(3.5vw * var(--screen-width));">The Alpherior Games Wiki</h1>
     {% with colours = get_colours() %}
     {% endwith %}
 {% endblock %}

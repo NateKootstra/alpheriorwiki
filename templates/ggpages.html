@@ -3,8 +3,14 @@
 {% block title %}{% with item, category, game = get_page_info() %}<title>{{ item.name }} | The Genome Guardian Wiki</title>{% endwith %}{% endblock %}
 
 {% block links1 %}
-    <link rel="stylesheet" href="{{ url_for('static', filename='styles/wikipages.css')}}">
-    <script src="{{ url_for('static', filename='js/wikipages.js')}}"></script>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles/ggpages.css')}}">
+    <script>
+        function showGrid() {
+            document.getElementsByClassName("itemicon")[0].style.display = "none";
+            document.getElementsByClassName("hamburger")[0].style.display = "none";
+            document.getElementsByClassName("itemlist")[0].style.display = "block";
+        }
+    </script>
 {% endblock %}
 
 {% block page %}

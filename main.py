@@ -150,7 +150,7 @@ def get_colours():
         "C" : "#40ffff",
         "G" : "#a0ff40",
         "T" : "#ffff40",
-        "Abyss" : "#a040ff",
+        "Abyss" : "#a040ff"
     }
     return colours
 app.jinja_env.globals.update(get_colours=get_colours)
@@ -231,6 +231,8 @@ def get_template(path):
         template = template.replace("Turret Scale -" + str(i), "Turret Scale <span style='color: #fffff; font-weight: bold;'>-" + str(i))
         template = template.replace("Delay +" + str(i), "Delay <span style='color: #ff0000; font-weight: bold;'>+" + str(i))
         template = template.replace("Delay -" + str(i), "Delay <span style='color: #00ff00; font-weight: bold;'>-" + str(i))
+        template = template.replace("Heat +" + str(i), "Heat <span style='color: #ff0000; font-weight: bold;'>+" + str(i))
+        template = template.replace("Heat -" + str(i), "Heat <span style='color: #00ff00; font-weight: bold;'>-" + str(i))
         template = template.replace(" +" + str(i), " <span style='color: #00ff00; font-weight: bold;'>+" + str(i))
         template = template.replace(" -" + str(i), " <span style='color: #ff0000; font-weight: bold;'>-" + str(i))
     template = template.replace("$", "</span>")
@@ -265,11 +267,11 @@ def perk(perkName):
 
 @app.route("/robots.txt")
 def robots():
-    return send_file('robots.txt', 'text/plain')
+    return send_file('botinfo/robots.txt', 'text/plain')
 
 @app.route("/sitemap.txt")
 def sitemap():
-    return send_file('sitemap.txt', 'text/plain')
+    return send_file('botinfo/sitemap.txt', 'text/plain')
 
 # Start the application.
 if __name__ == "__main__":
